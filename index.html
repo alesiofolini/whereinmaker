@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>WHERE IN MAKER</title>
+  </head>
+  <body>
+  <!-- As a link -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">WHERE IN MAKER</a>
+</nav>
+<br/>
+<main role="main" class="container">
+<form class="form">
+<div class="form-row justify-content-between">
+<div class="col-5">
+<textarea type="text" class="form-control" id="lista" rows="15" cols="33" onfocus="limpiar()" placeholder="copy list here"></textarea>
+</div>
+<div class="col align-self-center">
+<button type="button" class="btn btn-success btn-lg btn-block" id="botonarmarlista" onclick="armarlista()" class="nes-btn is-success">OK-></button>
+</div>
+<div class="col-5">
+<textarea type="text" class="form-control" id="listaarmada" rows="15" cols="33" placeholder="in condition will go here"></textarea>
+</div>
+</div>
+</form>
+<br/>
+<div class="row alert alert-success" role="alert" style="display:none;" id="ctc">
+  Copied to clipboard
+</div>
+</main>
+<script>
+var lista = document.getElementById("lista");
+var listaarmadap = document.getElementById("listaarmada");
+var ctc = document.getElementById("ctc");
+var armarlista = function(){
+	var listavalue = lista.value;
+	var listarray = listavalue.split(/\n/g);
+	var sinduplicados = [];
+	for(var i = 0;i < listarray.length; i++){
+        if(sinduplicados.indexOf(listarray[i]) == -1){
+            sinduplicados.push(listarray[i])
+        }
+    }
+	var listarraycompletado = [];
+	for(var i=0;i<sinduplicados.length;i++){
+		listarraycompletado.push("'"+sinduplicados[i].trim()+"'");
+	}
+	var listaposta = 'in ('+listarraycompletado.join()+')';
+	listaarmadap.innerHTML = listaposta;
+	listaarmadap.select();
+	document.execCommand("copy");
+	ctc.style.display = "block";
+};
+var limpiar = function(){
+	lista.value = '';
+	listaarmadap.innerHTML = '';
+	ctc.style.display = "none";
+};
+</script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
